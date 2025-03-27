@@ -1,9 +1,9 @@
 #version 300 es
-precision highp float;
+precision mediump float;
 
-out vec4 outColor;
-uniform vec4 u_color;
+out vec4 FragColor;
+uniform vec4 uColor;
 
 void main() {
-    outColor = u_color;
+    FragColor = uColor;
 } 

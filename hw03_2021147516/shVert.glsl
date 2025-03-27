@@ -1,9 +1,11 @@
 #version 300 es
-precision highp float;
 
-in vec2 a_position;
+layout (location = 0) in vec3 aPos;
+
+uniform vec2 uTranslation;
 
 void main() {
-    gl_Position = vec4(a_position, 0.0, 1.0);
-    gl_PointSize = 10.0; // 점의 크기 설정
-} 
+    vec3 pos = aPos;
+    pos.xy += uTranslation;
+    gl_Position = vec4(pos, 1.0);
+}
