@@ -5,9 +5,9 @@
 - Camera automatically rotates around the origin in a circular path
 - Y position oscillates up and down using sin function
 ---------------------------------------------------------------------------*/
-import { resizeAspectRatio, setupText, Axes } from '/util.js';
-import { Shader, readShaderFile } from '/shader.js';
-import { Cube } from '/squarePyramid.js';
+import { resizeAspectRatio, setupText, Axes } from './util.js';
+import { Shader, readShaderFile } from './shader.js';
+import { Cube } from './squarePyramid.js';
 
 const canvas = document.getElementById('glCanvas');
 const gl = canvas.getContext('webgl2');
