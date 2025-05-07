@@ -52,30 +52,30 @@ function setupKeyboardEvents() {
     document.addEventListener('keydown', (event) => {
         if (event.key == 'a') {
             arcBallMode = (arcBallMode === 'CAMERA') ? 'MODEL' : 'CAMERA';
-            updateText(textOverlay, "arcball mode: " + arcBallMode);
+            updateText(textOverlay2, "arcball mode: " + arcBallMode);
         } else if (event.key == 'r') {
             arcball.reset();
             modelMatrix = mat4.create(); 
             arcBallMode = 'CAMERA';
-            updateText(textOverlay, "arcball mode: " + arcBallMode);
+            updateText(textOverlay2, "arcball mode: " + arcBallMode);
         } else if (event.key == 's') {
             cone.copyVertexNormalsToNormals();
             cone.updateNormals();
             shadingMode = 'SMOOTH';
-            updateText(textOverlay2, "shading mode: SMOOTH (" + currentLighting + ")");
+            updateText(textOverlay3, "shading mode: SMOOTH (" + currentLighting + ")");
             render();
         } else if (event.key == 'f') {
             cone.copyFaceNormalsToNormals();
             cone.updateNormals();
             shadingMode = 'FLAT';
-            updateText(textOverlay2, "shading mode: FLAT (" + currentLighting + ")");
+            updateText(textOverlay3, "shading mode: FLAT (" + currentLighting + ")");
             render();
         } else if (event.key == 'g') {
             currentLighting = 'Gouraud';
             initShader('gouraudVert.glsl', 'gouraudFrag.glsl').then(newShader => {
                 shader = newShader;
                 configureShader();
-                updateText(textOverlay2, `shading mode: ${shadingMode} (GOURAUD)`);
+                updateText(textOverlay3, `shading mode: ${shadingMode} (GOURAUD)`);
                 render();
             });
         } else if (event.key == 'p') {
@@ -83,7 +83,7 @@ function setupKeyboardEvents() {
             initShader('shVert.glsl', 'shFrag.glsl').then(newShader => {
                 shader = newShader;
                 configureShader();
-                updateText(textOverlay2, `shading mode: ${shadingMode} (PHONG)`);
+                updateText(textOverlay3, `shading mode: ${shadingMode} (PHONG)`);
                 render();
             });
         }
@@ -173,7 +173,7 @@ async function main() {
     textOverlay2 = setupText(canvas, "arcball mode: " + arcBallMode, 2);
     textOverlay3 = setupText(canvas, "shading mode: " + shadingMode + " (" + currentLighting + ")", 3);
     textOverlay4 = setupText(canvas, "press 'a' to change arcball mode", 4);
-    textOverlay5 =  setupText(canvas, "press 'r' to reset arcball", 5);
+    textOverlay5 = setupText(canvas, "press 'r' to reset arcball", 5);
     textOverlay6 = setupText(canvas, "press 's' to switch to smooth shading", 6);
     textOverlay7 = setupText(canvas, "press 'f' to switch to flat shading", 7);
     textOverlay8 = setupText(canvas, "press 'g' to switch to Gouraud shading", 8);
