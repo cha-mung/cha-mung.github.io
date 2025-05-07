@@ -1,5 +1,4 @@
 #version 300 es
-
 precision highp float;
 
 in vec3 fragPos;  
@@ -27,24 +26,22 @@ void main() {
     // ambient
     vec3 rgb = material.diffuse;
     vec3 ambient = light.ambient * rgb;
-  	
-    // diffuse 
+
+    // normalize vectors
     vec3 norm = normalize(normal);
     vec3 lightDir = normalize(light.position - fragPos);
-    float dotNormLight = dot(norm, lightDir);
-    float diff = max(dotNormLight, 0.0);
-    vec3 diffuse = light.diffuse * diff * rgb;  
-    
-    // specular
     vec3 viewDir = normalize(u_viewPos - fragPos);
-    vec3 reflectDir = reflect(lightDir, norm);
-    float spec;
-    if (dotNormLight > 0.0) {
-        spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
-    }
-    else spec = 0.0f;
-    vec3 specular = light.specular * (spec * material.specular);  
-        
+
+    // diffuse
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = light.diffuse * diff * rgb;
+
+    // specular
+    vec3 reflectDir = reflect(-lightDir, norm);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+    vec3 specular = light.specular * spec * material.specular;
+
+    // 최종 색 계산
     vec3 result = ambient + diffuse + specular;
     FragColor = vec4(result, 1.0);
 }
