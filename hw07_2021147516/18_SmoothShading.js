@@ -71,7 +71,7 @@ function setupKeyboardEvents() {
             updateText(textOverlay3, "shading mode: FLAT (" + currentLighting + ")");
             render();
         } else if (event.key == 'g') {
-            currentLighting = 'Gouraud';
+            currentLighting = 'GOURAUD';
             initShader('gouraudVert.glsl', 'gouraudFrag.glsl').then(newShader => {
                 shader = newShader;
                 configureShader();
@@ -79,7 +79,7 @@ function setupKeyboardEvents() {
                 render();
             });
         } else if (event.key == 'p') {
-            currentLighting = 'Phong';
+            currentLighting = 'PHONG';
             initShader('shVert.glsl', 'shFrag.glsl').then(newShader => {
                 shader = newShader;
                 configureShader();
